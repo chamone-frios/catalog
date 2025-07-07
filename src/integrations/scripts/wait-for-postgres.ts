@@ -3,7 +3,7 @@ import { exec } from 'node:child_process';
 
 const checkPostgres = async () => {
   exec(
-    'docker exec app-postgres-dev pg_isready --host localhost',
+    'docker exec catalog-postgres-dev pg_isready --host localhost',
     (_, stdout) => {
       if (stdout.search('accepting connections') === -1) {
         setTimeout(() => {

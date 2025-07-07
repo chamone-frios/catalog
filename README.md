@@ -1,4 +1,4 @@
-# App
+# Catalog
 
 Catálogo de Produtos da Chamone Frios
 

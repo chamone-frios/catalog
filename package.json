@@ -1,7 +1,7 @@
 {
-  "name": "app",
+  "name": "catalog",
   "version": "1.0.0",
-  "description": "app for Distribuidora - MM",
+  "description": "Chamone Frios Catalog",
   "main": "./",
   "type": "commonjs",
   "scripts": {
