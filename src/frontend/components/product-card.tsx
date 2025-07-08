@@ -3,6 +3,8 @@ import { Box } from '@mui/system';
 import { Product, ProductMetric } from 'src/constants/types';
 import { numberToCurrency } from 'src/utils/number';
 
+import { CardFields } from './card-fields';
+
 type ProductCardProps = {
   product: Product;
 };
@@ -29,12 +31,10 @@ const ProductCard = ({ product }: ProductCardProps) => {
         <Typography gutterBottom variant="h6" component="div">
           {product.name}
         </Typography>
-        <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
+        <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
           {product.description}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Fabricante: {product.maker}
-        </Typography>
+        <CardFields label="Fabricante:" value={product.maker} />
         <Box
           sx={{
             width: '100%',

@@ -1,5 +1,6 @@
+import { CardFields } from './card-fields';
 import { Loading } from './loading';
 import { PageWrapper } from './page-wrapper/page-wrapper';
 import { ProductCard } from './product-card';
 
-export { PageWrapper, ProductCard, Loading };
+export { PageWrapper, ProductCard, Loading, CardFields };
