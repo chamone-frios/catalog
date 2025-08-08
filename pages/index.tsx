@@ -22,8 +22,8 @@ const Index = ({ products }: Props) => {
   return (
     <Stack spacing={8}>
       <Stack spacing={4}>
-        <Typography variant="hero-sm">Produtos</Typography>
-        <Typography>Esses são nossos produtos! 🧀</Typography>
+        <Typography variant="hero-sm">Chamone frios</Typography>
+        <Typography>Confira todos os nossos produtos!🧀</Typography>
       </Stack>
       <Divider />
       <Stack height="100%" gap={4}>
@@ -48,9 +48,17 @@ const Index = ({ products }: Props) => {
             </Button>
           </Stack>
         ) : (
-          products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))
+          <Stack
+            sx={(theme) => ({
+              gap: theme.spacing(8),
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+            })}
+          >
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </Stack>
         )}
       </Stack>
     </Stack>
