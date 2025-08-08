@@ -15,17 +15,19 @@ const PageWrapper = ({ children }: PropsWithChildren) => {
   return (
     <WallPaper>
       <Navbar>
-        <Stack height="100%">
-          <Image
-            alt="Chamone Frios"
-            src="/assets/logo.png"
-            width={64}
-            height={64}
-            style={{ borderRadius: '50%' }}
-          />
-        </Stack>
         <Link href="/">
-          <Stack alignItems="center">
+          <Stack height="100%" sx={{ cursor: 'pointer' }}>
+            <Image
+              alt="Chamone Frios"
+              src="/assets/logo.png"
+              width={64}
+              height={64}
+              style={{ borderRadius: '50%' }}
+            />
+          </Stack>
+        </Link>
+        <Link href="/">
+          <Stack alignItems="center" sx={{ cursor: 'pointer' }}>
             <IconButton sx={{ width: 'fit-content' }}>
               <LunchDiningOutlined />
             </IconButton>
@@ -33,7 +35,7 @@ const PageWrapper = ({ children }: PropsWithChildren) => {
           </Stack>
         </Link>
         <Link href="/contato">
-          <Stack alignItems="center">
+          <Stack alignItems="center" sx={{ cursor: 'pointer' }}>
             <IconButton sx={{ width: 'fit-content' }}>
               <LocalPhoneOutlined />
             </IconButton>
