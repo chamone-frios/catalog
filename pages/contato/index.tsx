@@ -56,7 +56,9 @@ const Index = () => {
           <ListItem key={contact.name}>
             <ListItemButton
               sx={(theme) => ({ borderRadius: theme.spacing(3) })}
-              onClick={() => window.open(contact.href, '_blank')}
+              onClick={() =>
+                window.open(contact.href, '_blank', 'noopener,noreferrer')
+              }
             >
               <ListItemIcon>
                 <IconButton>{contact.icon}</IconButton>
