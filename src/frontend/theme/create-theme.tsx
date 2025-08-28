@@ -31,6 +31,7 @@ export function createAppTheme({
     colorSchemes: scheme,
     typography: brandTheme.typography,
     spacing: [0, ...Object.values(ui.spaces)],
+    shape: ui['border-radius'],
     unstable_sxConfig: {
       borderRadius: {
         style(props) {

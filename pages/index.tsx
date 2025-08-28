@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next';
+import { useCallback, useMemo, useState } from 'react';
 
 import {
   Stack,
@@ -8,9 +9,10 @@ import {
   CircularProgress,
 } from '@mui/material';
 import { getProducts } from 'src/backend/database';
-import { Product } from 'src/constants/types';
-import { ProductCard } from 'src/frontend/components';
+import { Product, ProductLabel } from 'src/constants/types';
+import { Filters, ProductCard } from 'src/frontend/components';
 import { useIsNextLoading } from 'src/frontend/hooks';
+import { getProductLabel } from 'src/utils';
 
 type Props = {
   products: Product[];
@@ -18,12 +20,43 @@ type Props = {
 
 const Index = ({ products }: Props) => {
   const isLoading = useIsNextLoading();
+  const [filteredLabel, setFilteredLabel] = useState<ProductLabel | null>(null);
+  const onFilterChange = useCallback(
+    (label: ProductLabel) => {
+      if (label === filteredLabel) setFilteredLabel(null);
+      else setFilteredLabel(label);
+    },
+    [filteredLabel]
+  );
+  const filteredProducts = useMemo(
+    () =>
+      filteredLabel !== null
+        ? products.filter((product) => product.label === filteredLabel)
+        : products,
+    [filteredLabel, products]
+  );
 
   return (
     <Stack spacing={8}>
       <Stack spacing={4}>
         <Typography variant="hero-sm">Chamone frios</Typography>
         <Typography>Confira todos os nossos produtos!🧀</Typography>
+        <Stack direction="row" justifyContent="end" gap={2}>
+          <Filters
+            isCompact
+            items={[
+              ProductLabel.DAIRY,
+              ProductLabel.MEATS,
+              ProductLabel.PROCESSED,
+              ProductLabel.HAMBURGERS,
+            ].map((label) => ({
+              value: label,
+              label: getProductLabel(label),
+              active: filteredLabel === label,
+            }))}
+            onChange={onFilterChange}
+          />
+        </Stack>
       </Stack>
       <Divider />
       <Stack height="100%" gap={4}>
@@ -47,6 +80,22 @@ const Index = ({ products }: Props) => {
               Novo produto
             </Button>
           </Stack>
+        ) : filteredProducts.length === 0 ? (
+          <Stack
+            alignItems="center"
+            justifyContent="center"
+            spacing={4}
+            height="300px"
+          >
+            <Typography>Nenhum produto encontrado 😭</Typography>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => onFilterChange(null)}
+            >
+              Limpar filtros
+            </Button>
+          </Stack>
         ) : (
           <Stack
             sx={(theme) => ({
@@ -55,7 +104,7 @@ const Index = ({ products }: Props) => {
               gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
             })}
           >
-            {products.map((product) => (
+            {filteredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </Stack>
